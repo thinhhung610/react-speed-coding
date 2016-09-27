@@ -1,8 +1,11 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PostcssImport = require('postcss-easy-import');
+
 const APP = __dirname + '/app';
 const BUILD = __dirname + '/build';
-const STYLE = __dirname + '/app/style.css';
+const STYLE = __dirname + '/app/styles/style.css';
+const TEMPLATE = __dirname + '/app/templates/index_default.html';
 
 module.exports = {
 	entry: {
@@ -42,11 +45,19 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'node_modules/html-webpack-template/index.ejs',
-			title: 'React speed coding',
-			appMountId: 'app',
-			inject: false
+			template: TEMPLATE,
+			inject: 'body' // add script into the end of the body tag
 		}),
 		new webpack.HotModuleReplacementPlugin()
-	]
+	],
+	postcss: function() {
+		return [
+			PostcssImport({
+				addDependencyTo: webpack,
+				prefix: '_'
+			})
+			//prescss,
+			//autoprefixer({ browser: ['last two versions'] })
+		]
+	}
 };
