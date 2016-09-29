@@ -1,10 +1,12 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PostcssImport = require('postcss-easy-import');
+const PostcssImport = require('postcss-import');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 const APP = __dirname + '/app';
 const BUILD = __dirname + '/build';
-const STYLE = __dirname + '/app/styles/style.css';
+const STYLE = __dirname + '/app/style.css';
 const TEMPLATE = __dirname + '/app/templates/index_default.html';
 
 module.exports = {
@@ -28,7 +30,7 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				loaders: ['style', 'css'],
+				loaders: ['style', 'css', 'postcss'],
 				include: APP
 			}
 		]
@@ -50,14 +52,13 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin()
 	],
-	postcss: function() {
+	postcss: function(webpack) {
 		return [
 			PostcssImport({
-				addDependencyTo: webpack,
-				prefix: '_'
-			})
-			//prescss,
-			//autoprefixer({ browser: ['last two versions'] })
+				addDependencyTo: webpack
+			}),
+			autoprefixer,
+			precss
 		]
 	}
 };

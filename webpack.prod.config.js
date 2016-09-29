@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const PostcssImport = require('postcss-easy-import');
+const PostcssImport = require('postcss-import');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 const APP = __dirname + '/app';
 const BUILD = __dirname + '/build';
@@ -39,7 +41,7 @@ module.exports = {
       // Extract CSS during build
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css'),
+        loader: ExtractTextPlugin.extract('style', 'css!postcss'),
         include: APP
       }
     ]
@@ -83,12 +85,11 @@ module.exports = {
   ],
 	postcss: function() {
 		return [
-			PostcssImport({
-				addDependencyTo: webpack,
-				prefix: '_'
-			})
-			//prescss,
-			//autoprefixer({ browser: ['last two versions'] })
+      PostcssImport({
+				addDependencyTo: webpack
+			}),
+      autoprefixer,
+			precss
 		]
 	}
 };

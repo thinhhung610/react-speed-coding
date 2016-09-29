@@ -18,7 +18,7 @@ export default class World extends React.Component {
   }
 
   hindiGreet() {
-    this.setState({currentGreeting: 'Yohn Doe'});
+    this.setState({currentGreeting: 'Namaste'});
   }
 
   handleNameChange(event) {
