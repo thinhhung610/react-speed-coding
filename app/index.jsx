@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CardStack from './components/CardStack.jsx';
+import Page from './components/Page.jsx';
 
 ReactDOM.render(
-	<CardStack />,
+	<Page />,
 	document.getElementById('app')
 );

@@ -9,7 +9,7 @@ const autoprefixer = require('autoprefixer');
 
 const APP = __dirname + '/app';
 const BUILD = __dirname + '/build';
-const STYLE = __dirname + '/app/style.css';
+const STYLE = __dirname + '/app/styles/style.css';
 const PUBLIC = __dirname + '/app/public';
 const TEMPLATE = __dirname + '/app/templates/index_default.html';
 

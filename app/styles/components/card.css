@@ -1,0 +1,32 @@
+.card {
+  background: white;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px 0px darkgrey;
+  padding: .8em 1em 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::after {
+    content: '\00a0'; /* &nbsp; */
+    display: block;
+    height: 0px;
+    margin-top: 1em;
+    visibility: hidden;
+  }
+
+  /* card modifiers */
+
+  &.is-spaced {
+    margin-bottom: $space;
+  }
+
+  &.is-message {
+    cursor: pointer;
+    transition: 1s background;
+
+    &:hover {
+      background: honeydew;
+    }
+  }
+}
